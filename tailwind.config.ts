@@ -13,6 +13,15 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      animation: {
+        redden: 'redden 5s ease-in-out',
+      },
+      keyframes: {
+        redden: {
+          '0%, 50%': { backgroundColor: 'orange-500' },
+          '100%': { backgroundColor: 'red-600' },
+        }
+      }
     },
   },
   plugins: [],

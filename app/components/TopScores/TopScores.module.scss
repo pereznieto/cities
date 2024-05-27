@@ -1,0 +1,58 @@
+.scores {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  text-align: center;
+
+  .scoresText {
+    font-size: 25px;
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+
+  .topScores {
+    display: flex;
+    max-height: 370px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .emoji {
+    margin: 0 10px;
+  }
+
+  .difficulty {
+    margin: 0 20px;
+  }
+
+  .difficultyTitle {
+    margin-bottom: 20px;
+  }
+
+  .scoreItem {
+    margin: 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.topDawg {
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+
+  .name,
+  .score {
+    font-weight: 700;
+  }
+
+  .name {
+    margin-right: 10px;
+  }
+
+  .score {
+    font-family: 'Courier New', Courier, monospace;
+  }
+}

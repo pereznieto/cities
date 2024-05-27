@@ -1,0 +1,26 @@
+@import '../../mixins';
+
+.controls {
+  .round {
+    font-size: 20px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .score {
+    display: inline-block;
+    min-width: 181px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: orange;
+  }
+
+  .finalScore {
+    font-size: 40px;
+    animation: pulse-orange 3s infinite;
+  }
+
+  @include pulse(orange, 20px);
+}

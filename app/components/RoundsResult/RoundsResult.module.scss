@@ -1,0 +1,14 @@
+.roundsResult {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 250, 250, 0.05);
+  cursor: default;
+  z-index: 2;
+}
