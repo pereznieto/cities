@@ -33,7 +33,7 @@ const Splash = () => {
           showRoundsResult && '-top-full opacity-0',
         )}
       >
-        <div className="mx-5 my-12 text-6xl uppercase tracking-[15px]">Senscity</div>
+        <div className="mx-5 my-12 text-6xl uppercase tracking-[15px]">Cities</div>
         <div className="mb-7 text-3xl tracking-[4px]">Select difficulty to {gameOver ? 'play again' : 'start'}</div>
         <div className="flex">
           {difficulties.map((difficulty) => (
