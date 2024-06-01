@@ -1,7 +1,7 @@
 import { Button } from '@headlessui/react'
-import clsx from 'clsx';
-import { FC, useEffect, useRef } from 'react';
-import { CITIES_PER_GAME, getDisplayName } from '../utils/city';
+import clsx from 'clsx'
+import { FC, useEffect, useRef } from 'react'
+import { CITIES_PER_GAME, getDisplayName } from '../utils/city'
 import { useStore } from '../store'
 
 const SPACE_KEY = ' '
@@ -25,7 +25,7 @@ const Controls: FC = () => {
 
   useEffect(() => {
     const keyupHandler = handleKeyUp.current
-    window.addEventListener('keyup', keyupHandler);
+    window.addEventListener('keyup', keyupHandler)
     return () => void window.removeEventListener('keyup', keyupHandler)
   }, [])
 
@@ -33,7 +33,12 @@ const Controls: FC = () => {
     <div className="grid grid-cols-3 gap-4">
       {!splashScreen && (
         <div>
-          <div className={clsx('inline-block min-w-44 py-2.5 px-5 rounded-md bg-orange-500 text-lg uppercase tracking-wide', gameOver && 'text-4xl animate-pulse-orange')}>
+          <div
+            className={clsx(
+              'inline-block min-w-44 rounded-md bg-orange-500 px-5 py-2.5 text-lg uppercase tracking-wide',
+              gameOver && 'animate-pulse-orange text-4xl',
+            )}
+          >
             <p>
               Game score: <strong>{score.toFixed(0)}</strong>
             </p>
@@ -65,19 +70,24 @@ const Controls: FC = () => {
                 <span>completely!</span>
               )}
             </p>
-            <p className="mt-5 text-lg uppercase tracking-wider">Score: <strong>{pause.score}</strong></p>
+            <p className="mt-5 text-lg uppercase tracking-wider">
+              Score: <strong>{pause.score}</strong>
+            </p>
           </div>
         )}
       </div>
       {pause && !gameOver && (
         <div>
-          <Button onClick={nextCity} className="rounded bg-green-600 py-2 px-4 text-sm text-white data-[hover]:bg-green-500 data-[active]:bg-green-700 transition">
+          <Button
+            onClick={nextCity}
+            className="rounded bg-green-600 px-4 py-2 text-sm text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500"
+          >
             Next city
           </Button>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Controls;
+export default Controls

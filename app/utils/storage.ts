@@ -1,5 +1,5 @@
-import { PlayedCity } from "../store"
-import { Difficulty } from "./city"
+import { PlayedCity } from '../store'
+import { Difficulty } from './city'
 
 const STORE_KEY = 'cities-store'
 
@@ -17,5 +17,5 @@ export const saveScoreToDatabase = (score: Score): void => {
 
 export const getScoresFromDatabase = (): readonly Score[] => {
   const response = global?.window?.localStorage.getItem(STORE_KEY) || '[]'
-  return JSON.parse(response);
+  return JSON.parse(response)
 }

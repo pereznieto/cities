@@ -98,4 +98,4 @@ export const popularCities = [
   'Harare',
   'Kolkata',
   'Nanjing',
-];
+]

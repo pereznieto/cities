@@ -17,30 +17,34 @@ const Map: FC = () => {
       endTurn({
         x: clientX - mapSize.left,
         y: clientY - mapSize.top,
-      });
+      })
     }
-  };
+  }
 
   const measuredRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
-      const width = node.offsetWidth;
-      const height = node.offsetHeight;
-      const { top, left } = node.getBoundingClientRect();
+      const width = node.offsetWidth
+      const height = node.offsetHeight
+      const { top, left } = node.getBoundingClientRect()
 
       updateMapSize({
         width,
         height,
         top: parseInt(top.toFixed()),
         left: parseInt(left.toFixed()),
-      });
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   return (
-    <div ref={measuredRef} onClick={getMouseCoordinates} className="relative w-screen h-[43.15vw] z-[1] mx-auto my-0 bg-[url('./assets/map.jpg')] bg-no-repeat bg-contain bg-center cursor-crosshair">
+    <div
+      ref={measuredRef}
+      onClick={getMouseCoordinates}
+      className="relative z-[1] mx-auto my-0 h-[43.15vw] w-screen cursor-crosshair bg-[url('./assets/map.jpg')] bg-contain bg-center bg-no-repeat"
+    >
       {pause && !showRoundsResult && (
-        <div className="absolute top-0 left-0 z-[2] w-full h-full flex justify-center items-center flex-col bg-neutral-50/5 cursor-default">
+        <div className="absolute left-0 top-0 z-[2] flex h-full w-full cursor-default flex-col items-center justify-center bg-neutral-50/5">
           <RoundResult
             city={{
               latitude: pause.city.latitude,
@@ -52,7 +56,7 @@ const Map: FC = () => {
       )}
       {(splashScreen || gameOver) && <Splash />}
     </div>
-  );
-};
+  )
+}
 
-export default Map;
+export default Map

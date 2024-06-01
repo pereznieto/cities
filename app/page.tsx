@@ -5,5 +5,5 @@ export default function Home() {
     <main className="relative text-center" style={{ marginBottom: '50px' }}>
       <Game />
     </main>
-  );
+  )
 }

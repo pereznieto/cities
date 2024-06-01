@@ -1,8 +1,8 @@
 'use client'
 
-import Controls from './Controls';
-import Map from './Map';
-import Timer from './Timer';
+import Controls from './Controls'
+import Map from './Map'
+import Timer from './Timer'
 import { useStore } from '../store'
 
 const Game = () => {
@@ -11,12 +11,12 @@ const Game = () => {
   return (
     <>
       <Map />
-      <div className="text-2xl overflow-hidden">
+      <div className="overflow-hidden text-2xl">
         {!splashScreen && <Timer />}
         <Controls />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Game;
+export default Game
