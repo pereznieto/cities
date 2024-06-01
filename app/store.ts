@@ -49,7 +49,7 @@ export interface State {
   splashScreen: boolean
   showRoundsResult: boolean
   isScoreSaved: boolean
-  scores: readonly Score[]
+  scores: readonly Score[] | undefined
 }
 
 interface Actions {
@@ -75,7 +75,7 @@ export const initialState: State = {
   isRunning: false,
   isScoreSaved: false,
   splashScreen: true,
-  scores: [],
+  scores: undefined,
   mapSize: { height: 0, width: 0, top: 0, left: 0 },
   mode: Difficulty.Normal,
   timeLeft: 0,
@@ -163,7 +163,7 @@ export const useStore = create<State & Actions>((set) => ({
     set(({ scores, score, mode, playedCities }) => {
       const newScore = { name, score, mode, playedCities }
       saveScoreToDatabase(newScore)
-      return { scores: [...scores, newScore], isScoreSaved: true }
+      return { scores: [...(scores || []), newScore], isScoreSaved: true }
     }),
   getScores: () => set(() => ({ scores: getScoresFromDatabase() })),
   nextCity: () =>

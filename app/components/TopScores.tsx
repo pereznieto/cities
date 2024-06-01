@@ -1,14 +1,13 @@
 import clsx from 'clsx'
 import React from 'react'
 import { difficulties } from '../utils/city'
-import { isEmpty } from '../utils/isEmpty'
 import { useStore } from '../store'
 
 const TopScores = () => {
   const scores = useStore(({ scores }) => scores)
   const getScores = useStore(({ getScores }) => getScores)
 
-  if (isEmpty(scores)) {
+  if (!scores) {
     getScores()
     return (
       <div
@@ -50,28 +49,35 @@ const TopScores = () => {
           🌍
         </span>
       </p>
-      <div className="flex max-h-[370px] overflow-x-hidden overflow-y-scroll">
-        {groupedTopScores.map(({ difficulty, scores }) => (
-          <div key={difficulty} className="mx-5 my-0">
-            <h3 className="mb-5 capitalize">{difficulty}</h3>
-            {scores.map(({ name, score }, index) => (
-              <div
-                key={`${name}-${score}-${index}`}
-                className={clsx(
-                  'm-2.5 flex items-center justify-between text-base',
-                  index === 0 && 'text-lg font-bold',
-                )}
-              >
-                <span className="mr-2.5 font-bold">
-                  {name}
-                  {getTrophy(index)}
-                </span>
-                <span className="font-mono font-bold">{score}</span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      {scores.length === 0 ? (
+        <div>
+          <p>No scores yet…</p>
+          <p>Play a game and save your score to start the leaderboard!</p>
+        </div>
+      ) : (
+        <div className="flex max-h-[370px] overflow-x-hidden overflow-y-scroll">
+          {groupedTopScores.map(({ difficulty, scores }) => (
+            <div key={difficulty} className="mx-5 my-0">
+              <h3 className="mb-5 capitalize">{difficulty}</h3>
+              {scores.map(({ name, score }, index) => (
+                <div
+                  key={`${name}-${score}-${index}`}
+                  className={clsx(
+                    'm-2.5 flex items-center justify-between text-base',
+                    index === 0 && 'text-lg font-bold',
+                  )}
+                >
+                  <span className="mr-2.5 font-bold">
+                    {name}
+                    {getTrophy(index)}
+                  </span>
+                  <span className="font-mono font-bold">{score}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
