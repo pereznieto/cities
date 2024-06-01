@@ -1,31 +1,47 @@
-export const getRealCoordinates = (mapSize, currentCity) => ({
+import { LatitudeLongitude, MapSize } from "../store";
+import { City } from "./city";
+
+export interface Coordinates {
+  x: number
+  y: number
+}
+
+interface Line {
+  width: number
+  height: string
+  left: string
+  top: string
+  transform: string
+}
+
+export const getRealCoordinates = (mapSize: MapSize, currentCity: City): Coordinates => ({
   x: longitudeToX(mapSize.width, currentCity.longitude),
   y: latitudeToY(mapSize.height, currentCity.latitude),
 });
 
-export const yToLatitude = (height, y) => {
+export const yToLatitude = (height: number, y: number): number => {
   const mapEquator = height * (9 / 15);
   return ((mapEquator - y) * 90) / mapEquator;
 };
 
-export const xToLongitude = (width, x) => {
+export const xToLongitude = (width: number, x: number): number => {
   const mapGreenwich = width / 2;
   return ((x - mapGreenwich) * 180) / mapGreenwich;
 };
 
-export const latitudeToY = (height, latitude) => {
+export const latitudeToY = (height: number, latitude: number): number => {
   const mapEquator = height * (9 / 15);
-  return parseInt(mapEquator - (latitude * mapEquator) / 90);
+  return mapEquator - (latitude * mapEquator) / 90
 };
 
-export const longitudeToX = (width, longitude) => {
+export const longitudeToX = (width: number, longitude: number): number => {
   const mapGreenwich = width / 2;
-  return parseInt((longitude * mapGreenwich) / 180 + mapGreenwich);
+  return (longitude * mapGreenwich) / 180 + mapGreenwich
 };
 
 export const getDistanceBetweenTwoCoordinates = (
-  { latitude: lat1, longitude: lon1 },
-  { latitude: lat2, longitude: lon2 }
+  { latitude: lat1, longitude: lon1 }: LatitudeLongitude,
+  { latitude: lat2, longitude: lon2 }: LatitudeLongitude
 ) => {
   const earthDiameter = 12742;
   const rad = 0.017453292519943295;
@@ -43,7 +59,7 @@ export const getDistanceBetweenTwoCoordinates = (
   );
 };
 
-export const getLineBetweenTwoPoints = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
+export const getLineBetweenTwoPoints = ({ x: x1, y: y1 }: Coordinates, { x: x2, y: y2 }: Coordinates): Line => {
   const height = 2;
   const width = getDistanceBetweenTwoPoints(x1, y1, x2, y2);
   const angle = getAngleBetweenTwoPoints(x1, y1, x2, y2);
@@ -58,13 +74,13 @@ export const getLineBetweenTwoPoints = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
   };
 };
 
-const getDistanceBetweenTwoPoints = (x1, y1, x2, y2) =>
+const getDistanceBetweenTwoPoints = (x1: number, y1: number, x2: number, y2: number): number =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
-const getAngleBetweenTwoPoints = (x1, y1, x2, y2) =>
+const getAngleBetweenTwoPoints = (x1: number, y1: number, x2: number, y2: number): number =>
   Math.atan2(y1 - y2, x1 - x2) * (180 / Math.PI);
 
-const getCentreBetweenTwoPoints = (x1, y1, x2, y2, length, thickness) => ({
+const getCentreBetweenTwoPoints = (x1: number, y1: number, x2: number, y2: number, length: number, thickness: number) => ({
   x: (x1 + x2) / 2 - length / 2,
   y: (y1 + y2) / 2 - thickness / 2,
 });

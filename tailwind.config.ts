@@ -1,4 +1,8 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
+import { DefaultColors } from "tailwindcss/types/generated/colors";
+import colors from 'tailwindcss/colors'
+
+const pulseColors: readonly (keyof DefaultColors)[] = ['orange', 'red', 'green']
 
 const config: Config = {
   content: [
@@ -8,20 +12,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       animation: {
         redden: 'redden 5s ease-in-out',
+        ...(pulseColors.reduce((animations, color) => ({ ...animations, [`pulse-${color}`]: `pulse-${color} 2s infinite` }), {})),
       },
       keyframes: {
         redden: {
-          '0%, 50%': { backgroundColor: 'orange-500' },
-          '100%': { backgroundColor: 'red-600' },
-        }
-      }
+          '0%, 50%': { backgroundColor: colors.orange[500] },
+          '100%': { backgroundColor: colors.red[600] },
+        },
+        ...(pulseColors.reduce((keyframes, color) => ({ ...keyframes, [`pulse-${color}`]: {
+          '0%': { boxShadow: `0 0 0 0 ${colors[color][500]}50` },
+          '70%': { boxShadow: `0 0 0 20px ${colors[color][500]}00` },
+          '100%': { boxShadow: `0 0 0 0 ${colors[color][500]}00` },
+        } }), {})),
+      },
     },
   },
   plugins: [],
