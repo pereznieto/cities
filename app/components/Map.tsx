@@ -14,10 +14,7 @@ const Map: FC = () => {
 
   const getMouseCoordinates = ({ clientX, clientY }: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!gameOver && !pause && !splashScreen) {
-      endTurn({
-        x: clientX - mapSize.left,
-        y: clientY - mapSize.top,
-      })
+      endTurn({ x: clientX - mapSize.left, y: clientY - mapSize.top })
     }
   }
 

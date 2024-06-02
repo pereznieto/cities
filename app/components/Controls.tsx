@@ -29,7 +29,7 @@ const Controls: FC = () => {
   }, [])
 
   return (
-    <div>
+    <div className="select-none">
       {!splashScreen && (
         <>
           <GameScore />
@@ -47,25 +47,25 @@ const Controls: FC = () => {
         <>
           <div>
             <p>
-              You missed <strong>{pause?.city.name}</strong>
+              You missed <strong className="select-text">{pause?.city.name}</strong>
             </p>
             <p>
               {distance ? (
                 <span>
-                  by<strong> {distance.toFixed(0)}</strong> km
+                  by <strong className="select-text">{distance.toFixed(0)}</strong> km
                 </span>
               ) : (
                 <span>completely!</span>
               )}
             </p>
             <p className="mt-5 text-lg uppercase tracking-wider">
-              Round score: <strong>{pause.score}</strong>
+              Round score: <strong className="select-text">{pause.score}</strong>
             </p>
           </div>
           {!gameOver && (
             <Button
               onClick={nextCity}
-              className="mt-5 rounded bg-green-600 px-4 py-2 text-xl text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500"
+              className="mt-5 rounded-full bg-green-600 px-8 py-2 text-xl text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500"
             >
               Next round
             </Button>

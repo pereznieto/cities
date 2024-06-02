@@ -42,8 +42,8 @@ const Splash = () => {
           showRoundsResult ? 'top-full opacity-0' : 'top-0',
         )}
       >
-        <div className="mx-5 my-12 text-6xl uppercase tracking-[15px]">Cities</div>
-        <div className="mb-5 text-3xl tracking-[4px]">
+        <div className="mx-5 my-12 select-none text-6xl uppercase tracking-[15px]">Cities</div>
+        <div className="mb-5 select-none text-3xl tracking-[4px]">
           {gameOver && <p className="mb-2">Game over!</p>}
           <p>Select difficulty to {gameOver ? 'play again' : 'start'}</p>
         </div>
@@ -51,7 +51,7 @@ const Splash = () => {
           {difficulties.map((difficulty) => (
             <Button
               key={difficulty}
-              className="mx-5 my-0 rounded bg-green-600 px-4 py-2 text-sm capitalize text-white shadow-md transition hover:bg-green-700 hover:shadow-lg data-[active]:bg-green-800"
+              className="mx-4 rounded-full bg-green-600 px-7 py-2 text-lg capitalize text-white shadow-md transition hover:bg-green-700 hover:shadow-lg data-[active]:bg-green-800"
               data-twe-ripple-init
               data-twe-ripple-color="light"
               onClick={() => void play(difficulty)}

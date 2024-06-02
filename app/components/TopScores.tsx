@@ -62,11 +62,11 @@ const TopScores = () => {
                     index === 0 && 'text-lg font-bold',
                   )}
                 >
-                  <span className="mr-2.5 font-bold">
+                  <span className="mr-2.5 select-text font-bold">
                     {name}
                     {getTrophy(index)}
                   </span>
-                  <span className="font-mono font-bold">{score}</span>
+                  <span className="select-text font-mono font-bold">{score}</span>
                 </div>
               ))}
             </div>
