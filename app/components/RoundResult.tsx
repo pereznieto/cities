@@ -1,34 +1,37 @@
-import { FC } from 'react'
-import { Coordinates, getLineBetweenTwoPoints, latitudeToY, longitudeToX } from '../utils/distance'
-import { LatitudeLongitude, MapSize, PlayedCity, useStore } from '../store'
-
-const getScreenCoordinates = ({ height, width }: MapSize, { latitude, longitude }: LatitudeLongitude): Coordinates => ({
-  x: longitudeToX(width, longitude),
-  y: latitudeToY(height, latitude),
-})
-
-const getStyle = ({ x, y }: Coordinates) => ({ top: `${y - 4}px`, left: `${x - 4}px` })
+import { FC, useState } from 'react'
+import { getCoordinateStyle, getLineBetweenTwoPoints, getRealCoordinates } from '../utils/distance'
+import { PlayedCity, useStore } from '../store'
+import clsx from 'clsx'
 
 interface Props {
-  city: Pick<PlayedCity, 'latitude' | 'longitude' | 'clicked'>
+  city: Pick<PlayedCity, 'latitude' | 'longitude' | 'clicked' | 'name'>
 }
 
-const RoundResult: FC<Props> = ({ city: { latitude, longitude, clicked } }) => {
+const RoundResult: FC<Props> = ({ city: { latitude, longitude, clicked, name } }) => {
   const mapSize = useStore(({ mapSize }) => mapSize)
-  const realScreenCoordinates = getScreenCoordinates(mapSize, { latitude, longitude })
-  const clickedScreenCoordinates = clicked ? getScreenCoordinates(mapSize, clicked) : null
+  const realScreenCoordinates = getRealCoordinates(mapSize, { latitude, longitude })
+  const clickedScreenCoordinates = clicked ? getRealCoordinates(mapSize, clicked) : null
+  const [isCityShown, showCity] = useState<boolean>(true)
 
   return (
-    <div className="opacity-65 transition-all duration-500 ease-in-out hover:opacity-100">
+    <div
+      className={clsx(
+        'cursor-pointer transition-all duration-500 ease-in-out hover:opacity-100',
+        isCityShown ? 'opacity-100' : 'opacity-50',
+      )}
+      onClick={() => showCity((isCurrentlyShown) => !isCurrentlyShown)}
+    >
       <div
         className="absolute z-[3] h-2 w-2 animate-pulse-green rounded-full bg-green-500"
-        style={getStyle(realScreenCoordinates)}
-      />
+        style={getCoordinateStyle(realScreenCoordinates)}
+      >
+        {isCityShown && <div className="ml-1 mt-1 select-none text-black drop-shadow-md">{name}</div>}
+      </div>
       {clickedScreenCoordinates && (
         <>
           <div
             className="absolute z-[3] h-2 w-2 animate-pulse-red rounded-full bg-red-500"
-            style={getStyle(clickedScreenCoordinates)}
+            style={getCoordinateStyle(clickedScreenCoordinates)}
           />
           <div
             className="absolute bg-gradient-to-r from-red-500 to-green-500"

@@ -1,14 +1,13 @@
-import { Button } from '@headlessui/react'
-import clsx from 'clsx'
 import { FC, useEffect, useRef } from 'react'
+import { Button } from '@headlessui/react'
 import { CITIES_PER_GAME, getDisplayName } from '../utils/city'
 import { useStore } from '../store'
+import GameScore from './GameScore'
 
 const SPACE_KEY = ' '
 
 const Controls: FC = () => {
   const mode = useStore(({ mode }) => mode)
-  const score = useStore(({ score }) => score)
   const pause = useStore(({ pause }) => pause)
   const gameOver = useStore(({ gameOver }) => gameOver)
   const distance = useStore(({ distance }) => distance)
@@ -30,33 +29,22 @@ const Controls: FC = () => {
   }, [])
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div>
       {!splashScreen && (
-        <div>
-          <div
-            className={clsx(
-              'inline-block min-w-44 rounded-md bg-orange-500 px-5 py-2.5 text-lg uppercase tracking-wide',
-              gameOver && 'animate-pulse-orange text-4xl',
-            )}
-          >
-            <p>
-              Game score: <strong>{score.toFixed(0)}</strong>
-            </p>
-          </div>
-        </div>
-      )}
-      <div>
-        {!splashScreen && (
-          <p className="-mt-2.5 mb-5 text-xl uppercase tracking-wider">
+        <>
+          <GameScore />
+          <p className="my-5 text-xl uppercase tracking-wider">
             Round <strong>{round}</strong> of <strong>{CITIES_PER_GAME}</strong>
           </p>
-        )}
-        {!splashScreen && !pause && currentCity && (
-          <p>
-            Find <strong>{getDisplayName(currentCity, mode)}</strong>
-          </p>
-        )}
-        {pause && (
+          {!pause && currentCity && (
+            <p>
+              Find <strong>{getDisplayName(currentCity, mode)}</strong>
+            </p>
+          )}
+        </>
+      )}
+      {pause && (
+        <>
           <div>
             <p>
               You missed <strong>{pause?.city.name}</strong>
@@ -64,27 +52,25 @@ const Controls: FC = () => {
             <p>
               {distance ? (
                 <span>
-                  by<strong> {distance.toFixed(2)}</strong> km
+                  by<strong> {distance.toFixed(0)}</strong> km
                 </span>
               ) : (
                 <span>completely!</span>
               )}
             </p>
             <p className="mt-5 text-lg uppercase tracking-wider">
-              Score: <strong>{pause.score}</strong>
+              Round score: <strong>{pause.score}</strong>
             </p>
           </div>
-        )}
-      </div>
-      {pause && !gameOver && (
-        <div>
-          <Button
-            onClick={nextCity}
-            className="rounded bg-green-600 px-4 py-2 text-sm text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500"
-          >
-            Next city
-          </Button>
-        </div>
+          {!gameOver && (
+            <Button
+              onClick={nextCity}
+              className="mt-5 rounded bg-green-600 px-4 py-2 text-xl text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500"
+            >
+              Next round
+            </Button>
+          )}
+        </>
       )}
     </div>
   )

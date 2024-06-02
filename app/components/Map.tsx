@@ -50,6 +50,7 @@ const Map: FC = () => {
               latitude: pause.city.latitude,
               longitude: pause.city.longitude,
               clicked: pause.clicked,
+              name: pause.city.name,
             }}
           />
         </div>

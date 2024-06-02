@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic'
 import Game from './components/Game'
 
-export default function Home() {
-  return (
-    <main className="relative text-center" style={{ marginBottom: '50px' }}>
-      <Game />
-    </main>
-  )
-}
+const DynamicElementsInitializer = dynamic(() => import('./components/ElementsInitializer'), { ssr: false })
+
+const Home = () => (
+  <main className="relative mb-12 text-center">
+    <DynamicElementsInitializer />
+    <Game />
+  </main>
+)
+
+export default Home

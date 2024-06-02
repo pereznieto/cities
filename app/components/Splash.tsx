@@ -1,16 +1,19 @@
-import clsx from 'clsx'
 import React from 'react'
 import { Button } from '@headlessui/react'
 import { difficulties } from '../utils/city'
-import RoundsResult from './RoundsResult'
 import SaveScore from './SaveScore'
 import TopScores from './TopScores'
 import { useStore } from '../store'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
+import RoundResult from './RoundResult'
+import GameScore from './GameScore'
+import clsx from 'clsx'
 
 const Splash = () => {
   const gameOver = useStore(({ gameOver }) => gameOver)
   const isScoreSaved = useStore(({ isScoreSaved }) => isScoreSaved)
   const showRoundsResult = useStore(({ showRoundsResult }) => showRoundsResult)
+  const playedCities = useStore(({ playedCities }) => playedCities)
   const startGame = useStore(({ startGame }) => startGame)
   const restartGame = useStore(({ restartGame }) => restartGame)
   const toggleRoundsResult = useStore(({ toggleRoundsResult }) => toggleRoundsResult)
@@ -19,34 +22,46 @@ const Splash = () => {
   return (
     <>
       {gameOver && (
-        <Button
-          onClick={toggleRoundsResult}
-          className="z-3 absolute top-1 rounded bg-sky-600 px-4 py-2 text-sm text-white transition data-[active]:bg-sky-700 data-[hover]:bg-sky-500"
-        >
-          {showRoundsResult ? 'Hide' : 'Show'} Results
-        </Button>
+        <>
+          <div className="absolute left-0 top-0 z-[2] h-full w-full cursor-default">
+            {playedCities.map((city) => (
+              <RoundResult key={city.id} city={city} />
+            ))}
+          </div>
+          <Button
+            onClick={toggleRoundsResult}
+            className="absolute right-7 top-7 z-[3] rounded-full bg-sky-600 p-2 text-white shadow-md transition hover:bg-sky-700 hover:shadow-lg data-[active]:bg-sky-800"
+          >
+            {showRoundsResult ? <EyeSlashIcon className="size-5" /> : <EyeIcon className="size-5" />}
+          </Button>
+        </>
       )}
-      {gameOver && <RoundsResult />}
       <div
         className={clsx(
-          'absolute top-0 z-[2] flex min-h-full w-full cursor-default flex-col items-center justify-center bg-white/70 transition-all duration-500 ease-in-out',
-          showRoundsResult && '-top-full opacity-0',
+          'absolute z-[2] flex h-screen w-full cursor-default flex-col items-center bg-white/70 transition-all duration-500 ease-in-out',
+          showRoundsResult ? 'top-full opacity-0' : 'top-0',
         )}
       >
         <div className="mx-5 my-12 text-6xl uppercase tracking-[15px]">Cities</div>
-        <div className="mb-7 text-3xl tracking-[4px]">Select difficulty to {gameOver ? 'play again' : 'start'}</div>
-        <div className="flex">
+        <div className="mb-5 text-3xl tracking-[4px]">
+          {gameOver && <p className="mb-2">Game over!</p>}
+          <p>Select difficulty to {gameOver ? 'play again' : 'start'}</p>
+        </div>
+        <div className="mb-8 flex">
           {difficulties.map((difficulty) => (
             <Button
               key={difficulty}
-              className="mx-5 my-0 rounded bg-sky-600 px-4 py-2 text-sm capitalize text-white transition data-[active]:bg-sky-700 data-[hover]:bg-sky-500"
+              className="mx-5 my-0 rounded bg-green-600 px-4 py-2 text-sm capitalize text-white shadow-md transition hover:bg-green-700 hover:shadow-lg data-[active]:bg-green-800"
+              data-twe-ripple-init
+              data-twe-ripple-color="light"
               onClick={() => void play(difficulty)}
             >
               {difficulty}
             </Button>
           ))}
         </div>
-        {gameOver ? isScoreSaved ? <TopScores /> : <SaveScore /> : <TopScores />}
+        {gameOver && <GameScore />}
+        {gameOver && !isScoreSaved ? <SaveScore /> : <TopScores />}
       </div>
     </>
   )

@@ -9,12 +9,7 @@ const TopScores = () => {
 
   if (!scores) {
     getScores()
-    return (
-      <div
-        className="text-surface mt-8 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-sky-500 border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
-        role="status"
-      />
-    )
+    return null
   }
 
   const groupedTopScores = difficulties.map((difficulty) => ({
@@ -39,19 +34,19 @@ const TopScores = () => {
   }
 
   return (
-    <div className="mt-12 bg-white p-5 text-center shadow-lg">
+    <div className="mt-8 select-none bg-white p-5 text-center shadow-lg">
       <p className="mx-0 mb-2.5 mt-0 text-2xl font-bold">
         <span className="mx-2.5 my-0" role="img" aria-label="world-America-icon">
           🌎
         </span>
-        Top scores locally
+        Top scores
         <span className="mx-2.5 my-0" role="img" aria-label="world-Europe-icon">
           🌍
         </span>
       </p>
       {scores.length === 0 ? (
         <div>
-          <p>No scores yet…</p>
+          <p>No scores… yet!</p>
           <p>Play a game and save your score to start the leaderboard!</p>
         </div>
       ) : (

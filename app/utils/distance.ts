@@ -14,9 +14,12 @@ interface Line {
   transform: string
 }
 
-export const getRealCoordinates = (mapSize: MapSize, currentCity: City): Coordinates => ({
-  x: longitudeToX(mapSize.width, currentCity.longitude),
-  y: latitudeToY(mapSize.height, currentCity.latitude),
+export const getRealCoordinates = (
+  { height, width }: MapSize,
+  { latitude, longitude }: LatitudeLongitude,
+): Coordinates => ({
+  x: longitudeToX(width, longitude),
+  y: latitudeToY(height, latitude),
 })
 
 export const yToLatitude = (height: number, y: number): number => {
@@ -56,6 +59,8 @@ export const getDistanceBetweenTwoCoordinates = (
     )
   )
 }
+
+export const getCoordinateStyle = ({ x, y }: Coordinates) => ({ top: `${y - 4}px`, left: `${x - 4}px` })
 
 export const getLineBetweenTwoPoints = ({ x: x1, y: y1 }: Coordinates, { x: x2, y: y2 }: Coordinates): Line => {
   const height = 2

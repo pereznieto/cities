@@ -9,6 +9,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/tw-elements/js/**/*.js',
   ],
   theme: {
     extend: {
@@ -29,7 +30,7 @@ const config: Config = {
             ...keyframes,
             [`pulse-${color}`]: {
               '0%': { boxShadow: `0 0 0 0 ${colors[color][500]}50` },
-              '70%': { boxShadow: `0 0 0 20px ${colors[color][500]}00` },
+              '70%': { boxShadow: `0 0 0 ${color === 'orange' ? '20' : '10'}px ${colors[color][500]}00` },
               '100%': { boxShadow: `0 0 0 0 ${colors[color][500]}00` },
             },
           }),
@@ -38,6 +39,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tw-elements/plugin.cjs')],
 }
 export default config
