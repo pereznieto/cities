@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useEffect, useRef } from 'react'
 import RoundResult from './RoundResult'
 import Splash from './Splash'
 import { useStore } from '../store'
@@ -11,32 +11,33 @@ const Map: FC = () => {
   const showRoundsResult = useStore(({ showRoundsResult }) => showRoundsResult)
   const updateMapSize = useStore(({ updateMapSize }) => updateMapSize)
   const endTurn = useStore(({ endTurn }) => endTurn)
+  const mapElement = useRef<HTMLDivElement | null>(null)
 
-  const getMouseCoordinates = ({ clientX, clientY }: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const getMouseCoordinates = ({ clientX, clientY }: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     if (!gameOver && !pause && !splashScreen) {
       endTurn({ x: clientX - mapSize.left, y: clientY - mapSize.top })
     }
   }
 
-  const measuredRef = useCallback((node: HTMLDivElement | null) => {
-    if (node !== null) {
-      const width = node.offsetWidth
-      const height = node.offsetHeight
-      const { top, left } = node.getBoundingClientRect()
+  const measureMap = useCallback((): void => {
+    if (mapElement.current) {
+      const width = mapElement.current.offsetWidth
+      const height = mapElement.current.offsetHeight
+      const { top, left } = mapElement.current.getBoundingClientRect()
 
-      updateMapSize({
-        width,
-        height,
-        top: parseInt(top.toFixed()),
-        left: parseInt(left.toFixed()),
-      })
+      updateMapSize({ width, height, top: parseInt(top.toFixed()), left: parseInt(left.toFixed()) })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [updateMapSize])
+
+  useEffect(() => {
+    measureMap()
+    window.addEventListener('resize', measureMap)
+    return () => void window.removeEventListener('resize', measureMap)
+  }, [measureMap])
 
   return (
     <div
-      ref={measuredRef}
+      ref={mapElement}
       onClick={getMouseCoordinates}
       className="relative z-[1] mx-auto my-0 h-[43.15vw] w-screen cursor-crosshair bg-[url('./assets/map.jpg')] bg-contain bg-center bg-no-repeat"
     >
