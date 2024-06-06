@@ -29,46 +29,49 @@ const Controls: FC = () => {
   }, [])
 
   return (
-    <div className="select-none">
+    <div className="mx-5 select-none items-start justify-between md:flex">
       {!splashScreen && (
         <>
           <GameScore />
-          <p className="my-5 text-xl uppercase tracking-wider">
-            Round <strong>{round}</strong> of <strong>{CITIES_PER_GAME}</strong>
-          </p>
-          {!pause && currentCity && (
-            <p>
-              Find <strong>{getDisplayName(currentCity, mode)}</strong>
-            </p>
-          )}
-        </>
-      )}
-      {pause && (
-        <>
-          <div>
-            <p>
-              You missed <strong className="select-text">{pause?.city.name}</strong>
-            </p>
-            <p>
-              {distance ? (
-                <span>
-                  by <strong className="select-text">{distance.toFixed(0)}</strong> km
+          <div className="mx-2 my-5 md:my-0">
+            <p className="text-xl uppercase tracking-wider">
+              Round <strong>{round}</strong> of <strong>{CITIES_PER_GAME}</strong>{' '}
+              {pause && (
+                <span className="text-base">
+                  (+<strong className="select-text">{pause.score}</strong> points)
                 </span>
-              ) : (
-                <span>completely!</span>
               )}
             </p>
-            <p className="mt-5 text-lg uppercase tracking-wider">
-              Round score: <strong className="select-text">{pause.score}</strong>
-            </p>
+            {pause ? (
+              <p className="text-xl">
+                You missed <strong className="select-text">{pause?.city.name}</strong>{' '}
+                {distance ? (
+                  <span>
+                    by <strong className="select-text">{distance.toFixed(0)}</strong> km
+                  </span>
+                ) : (
+                  <span>completely!</span>
+                )}
+              </p>
+            ) : (
+              currentCity && (
+                <p>
+                  Find <strong>{getDisplayName(currentCity, mode)}</strong>
+                </p>
+              )
+            )}
           </div>
-          {!gameOver && (
+          {pause && !gameOver ? (
             <Button
               onClick={nextCity}
-              className="mt-5 rounded-full bg-green-600 px-8 py-2 text-xl text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500"
+              className="rounded-full bg-green-600 px-8 py-2 text-xl text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500 md:w-1/4"
             >
               Next round
             </Button>
+          ) : (
+            <div className="opacity-0 md:w-1/4" aria-label="Easer Egg">
+              🥚
+            </div>
           )}
         </>
       )}

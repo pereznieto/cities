@@ -9,7 +9,7 @@ const GameScore: FC = () => {
   return (
     <div
       className={clsx(
-        'inline-block min-w-44 select-none rounded-md bg-orange-500 px-5 py-2.5 text-lg uppercase tracking-wide text-black',
+        'inline-block min-w-52 select-none rounded-md bg-orange-500 px-5 py-2.5 text-lg uppercase tracking-wide text-black md:w-1/4',
         gameOver && 'animate-pulse-orange text-4xl',
       )}
     >
