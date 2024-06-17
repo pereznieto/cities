@@ -99,10 +99,11 @@ export const useStore = create<State & Actions>((set) => ({
       }
     }),
   restartGame: (mode: State['mode']) =>
-    set(() => {
+    set(({ mapSize }) => {
       const citiesToPlay = getCitiesToPlay(mode)
       return {
         ...initialState,
+        mapSize,
         mode,
         isRunning: true,
         splashScreen: false,

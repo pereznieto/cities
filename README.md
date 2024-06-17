@@ -12,7 +12,9 @@
 ### Pending stuff
 
 - 📱 Mobile responsiveness
-- 🎨 MAke the UI prettier
+- 🎨 Make the UI prettier
+- 👨‍💻 General TD and code clean-up
+- 👌🏼 Unit tests
 - ~~📜 Instructions~~
 - ~~🌍 Favicon~~
 - ~~💻 Support screen resizing (map dimensions recalculation)~~
@@ -24,8 +26,6 @@
 - ~~📖 Pre-select cities to play at the beginning of the game. This should improve performance and pave the way for peer-to-peer battles (Note: need to think about how to prevent people from cheating here if they inspect the state/code.)~~
 - ~~🙈 Score to pop up from line~~
 - ~~🏏 Scoreboard displayed in 3 columns sorted by difficulty~~
-- 👨‍💻 General TD and code clean-up
-- 👌🏼 Unit tests
 
 #### Potential 'microservices'
 
