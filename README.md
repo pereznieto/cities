@@ -11,6 +11,7 @@
 
 ### Pending stuff
 
+- 🌙 Dark mode
 - 📱 Mobile responsiveness
 - 🎨 Make the UI prettier
 - 👨‍💻 General TD and code clean-up

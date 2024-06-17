@@ -39,6 +39,12 @@ const config: Config = {
       },
     },
   },
+  safelist: [
+    {
+      // Should match app/components/Button.tsx > Props['color']
+      pattern: /bg-(green|sky)-(400|500|600|700)/,
+    },
+  ],
   plugins: [require('tw-elements/plugin.cjs')],
 }
 export default config
