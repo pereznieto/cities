@@ -11,10 +11,10 @@
 
 ### Pending stuff
 
-- 📜 Instructions
 - 📱 Mobile responsiveness
 - 🎨 MAke the UI prettier
-- 🌍 Favicon
+- ~~📜 Instructions~~
+- ~~🌍 Favicon~~
 - ~~💻 Support screen resizing (map dimensions recalculation)~~
 - ~~🐛 Sometimes top scores clear when new score is saved~~
 - ~~📈 Improve scoring (right now almost impossible to get over 85)~~
