@@ -25,7 +25,9 @@ const RoundResult: FC<Props> = ({ city: { latitude, longitude, clicked, name } }
         className="absolute z-[3] h-2 w-2 animate-pulse-green rounded-full bg-green-500"
         style={getCoordinateStyle(realScreenCoordinates)}
       >
-        {isCityShown && <div className="ml-1 mt-1 select-none text-black drop-shadow-md">{name}</div>}
+        {isCityShown && (
+          <div className="ml-1 mt-1 select-none font-medium text-black drop-shadow-2xl hover:drop-shadow">{name}</div>
+        )}
       </div>
       {clickedScreenCoordinates && (
         <>
