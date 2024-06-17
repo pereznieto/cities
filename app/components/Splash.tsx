@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@headlessui/react'
+import Button from './Button'
 import { difficulties } from '../utils/city'
 import SaveScore from './SaveScore'
 import TopScores from './TopScores'
@@ -30,7 +30,9 @@ const Splash = () => {
           </div>
           <Button
             onClick={toggleRoundsResult}
-            className="absolute right-7 top-7 z-[3] rounded-full bg-sky-600 p-2 text-white shadow-md transition hover:bg-sky-700 hover:shadow-lg data-[active]:bg-sky-800"
+            color="sky"
+            className="absolute right-7 top-7 z-[3] p-2"
+            title="Click to see results on map"
           >
             {showRoundsResult ? <EyeSlashIcon className="size-5" /> : <EyeIcon className="size-5" />}
           </Button>
@@ -53,9 +55,7 @@ const Splash = () => {
           {difficulties.map((difficulty) => (
             <Button
               key={difficulty}
-              className="mx-4 rounded-full bg-green-600 px-7 py-2 text-lg capitalize text-white shadow-md transition hover:bg-green-700 hover:shadow-lg data-[active]:bg-green-800"
-              data-twe-ripple-init
-              data-twe-ripple-color="light"
+              className="mx-4 px-7 py-2 text-lg capitalize"
               onClick={() => void play(difficulty)}
             >
               {difficulty}

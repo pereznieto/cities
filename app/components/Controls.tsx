@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef } from 'react'
-import { Button } from '@headlessui/react'
+import Button from './Button'
 import { CITIES_PER_GAME, getDisplayName } from '../utils/city'
 import { useStore } from '../store'
 import GameScore from './GameScore'
@@ -62,10 +62,7 @@ const Controls: FC = () => {
             )}
           </div>
           {pause && !gameOver ? (
-            <Button
-              onClick={nextCity}
-              className="rounded-full bg-green-600 px-8 py-2 text-xl text-white transition data-[active]:bg-green-700 data-[hover]:bg-green-500 md:w-1/4"
-            >
+            <Button onClick={nextCity} className="px-8 py-2 text-xl md:w-1/4">
               Next round
             </Button>
           ) : (
