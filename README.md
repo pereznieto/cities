@@ -13,10 +13,9 @@
 
 - 📜 Instructions
 - 📱 Mobile responsiveness
-- 💻 Support screen resizing (map dimensions recalculation)
 - 🎨 MAke the UI prettier
-- 🔐 Make API calls safer (CORS) and better (lambda code)
 - 🌍 Favicon
+- ~~💻 Support screen resizing (map dimensions recalculation)~~
 - ~~🐛 Sometimes top scores clear when new score is saved~~
 - ~~📈 Improve scoring (right now almost impossible to get over 85)~~
 - ~~📍 Better turn result screen (display distance and time)~~

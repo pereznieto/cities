@@ -14,7 +14,7 @@ const SaveScore: FC = () => {
         <Input
           type="text"
           id="name"
-          className="peer block min-h-[auto] w-full rounded border-0 bg-sky-200/50 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+          className="peer block min-h-[auto] w-full rounded border-0 bg-sky-200/90 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
           placeholder="Name"
           autoComplete="off"
           onChange={({ target }) => void setName(target.value)}
@@ -25,7 +25,7 @@ const SaveScore: FC = () => {
       </Field>
       <Button
         onClick={saveNewScore}
-        className="ml-5 rounded bg-sky-600 px-4 py-2 text-sm text-white transition hover:bg-sky-700 data-[disabled]:cursor-not-allowed data-[active]:bg-sky-800 data-[disabled]:bg-sky-300"
+        className="ml-5 rounded bg-sky-600 px-4 py-2 text-sm text-white transition hover:bg-sky-700 data-[disabled]:cursor-not-allowed data-[active]:bg-sky-800 data-[disabled]:bg-sky-400"
         disabled={isScoreSaved || !name}
         data-twe-ripple-init
         data-twe-ripple-color="light"

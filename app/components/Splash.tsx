@@ -45,6 +45,8 @@ const Splash = () => {
         <div className="mx-5 my-12 select-none text-6xl uppercase tracking-[15px]">Cities</div>
         <div className="mb-5 select-none text-3xl tracking-[4px]">
           {gameOver && <p className="mb-2">Game over!</p>}
+          <p className="mx-10 text-lg md:mx-32">Guess where the city is on the map by clicking on its location.</p>
+          <p className="mx-10 mb-4 text-lg md:mx-32">You get points for both accuracy and speed!</p>
           <p>Select difficulty to {gameOver ? 'play again' : 'start'}</p>
         </div>
         <div className="mb-8 flex">
